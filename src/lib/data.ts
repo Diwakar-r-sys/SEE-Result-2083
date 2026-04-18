@@ -44,6 +44,22 @@ const generateSubjectMark = (subject: string, theoryScore: number, practicalScor
 };
 
 export const MOCK_RESULTS: Record<string, StudentResult> = {
+  '00916304I': {
+    symbolNumber: '00916304I',
+    name: 'Candidate 00916304I',
+    schoolName: 'Laxmi Secondary School',
+    gpa: 3.09,
+    overallGrade: 'B+',
+    status: 'Pass',
+    marks: [
+      generateSubjectMark('Compulsory English', 62, 24),    // Total 86 -> A  (3.6)
+      generateSubjectMark('Compulsory Nepali', 48, 23),     // Total 71 -> B+ (3.2)
+      generateSubjectMark('Compulsory Math', 50, 24),       // Total 74 -> B+ (3.2)
+      generateSubjectMark('Compulsory Science', 42, 22),    // Total 64 -> B  (2.8)
+      generateSubjectMark('Compulsory Social Studies', 45, 23), // Total 68 -> B (2.8)
+      generateSubjectMark('Optional I (Computer)', 48, 24), // Total 72 -> B+ (3.2)
+    ],
+  },
   '00916304L': {
     symbolNumber: '00916304L',
     name: 'Candidate 00916304L',
