@@ -169,11 +169,13 @@ export const fetchResult = async (symbolNum: string): Promise<StudentResult> => 
         if (theoryScore > 75) theoryScore = 75;
 
         const subjectMark = generateSubjectMark(subject, theoryScore, practicalScore);
-        totalGpSum += subjectMark.gradePoint;
         generatedMarks.push(subjectMark);
       });
 
-      const averageGpa = Number((totalGpSum / generatedMarks.length).toFixed(2));
+      // Pick a random passing GPA that does not go above 3.09 and does not include 4.0
+      const allowedGpas = [2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.05, 3.09];
+      const averageGpa = allowedGpas[Math.floor(Math.random() * allowedGpas.length)];
+
       let overallGrade = 'C';
       if (averageGpa >= 3.6) overallGrade = 'A+';
       else if (averageGpa >= 3.2) overallGrade = 'A';
