@@ -44,6 +44,38 @@ const generateSubjectMark = (subject: string, theoryScore: number, practicalScor
 };
 
 export const MOCK_RESULTS: Record<string, StudentResult> = {
+  '00916301I': {
+    symbolNumber: '00916301I',
+    name: 'Candidate 00916301I',
+    schoolName: 'Laxmi Secondary School',
+    gpa: 3.09,
+    overallGrade: 'B+',
+    status: 'Pass',
+    marks: [
+      generateSubjectMark('Compulsory English', 62, 24),
+      generateSubjectMark('Compulsory Nepali', 48, 23),
+      generateSubjectMark('Compulsory Math', 50, 24),
+      generateSubjectMark('Compulsory Science', 42, 22),
+      generateSubjectMark('Compulsory Social Studies', 45, 23),
+      generateSubjectMark('Optional I (Computer)', 48, 24),
+    ],
+  },
+  '00916309Q': {
+    symbolNumber: '00916309Q',
+    name: 'Candidate 00916309Q',
+    schoolName: 'Laxmi Secondary School',
+    gpa: 3.00,
+    overallGrade: 'B+',
+    status: 'Pass',
+    marks: [
+      generateSubjectMark('Compulsory English', 60, 24),
+      generateSubjectMark('Compulsory Nepali', 45, 23),
+      generateSubjectMark('Compulsory Math', 50, 24),
+      generateSubjectMark('Compulsory Science', 40, 22),
+      generateSubjectMark('Compulsory Social Studies', 42, 23),
+      generateSubjectMark('Optional I (Computer)', 45, 24),
+    ],
+  },
   '00916304I': {
     symbolNumber: '00916304I',
     name: 'Candidate 00916304I',
@@ -172,17 +204,9 @@ export const fetchResult = async (symbolNum: string): Promise<StudentResult> => 
         generatedMarks.push(subjectMark);
       });
 
-      // Pick a random passing GPA that does not go above 3.09 and does not include 4.0
-      const allowedGpas = [2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.05, 3.09];
-      const averageGpa = allowedGpas[Math.floor(Math.random() * allowedGpas.length)];
-
-      let overallGrade = 'C';
-      if (averageGpa >= 3.6) overallGrade = 'A+';
-      else if (averageGpa >= 3.2) overallGrade = 'A';
-      else if (averageGpa >= 2.8) overallGrade = 'B+';
-      else if (averageGpa >= 2.4) overallGrade = 'B';
-      else if (averageGpa >= 2.0) overallGrade = 'C+';
-      else overallGrade = 'C';
+      // Make all random unlisted symbol numbers FAIL by default
+      const averageGpa = 'NG';
+      const overallGrade = 'NG';
 
       const newResult: StudentResult = {
         symbolNumber: formattedSymbol,
@@ -190,7 +214,7 @@ export const fetchResult = async (symbolNum: string): Promise<StudentResult> => 
         schoolName: 'Laxmi Secondary School',
         gpa: averageGpa,
         overallGrade: overallGrade,
-        status: 'Pass', // Ensure it always says "Pass"
+        status: 'Fail', // Default all unknown to Fail
         marks: generatedMarks,
       };
 
